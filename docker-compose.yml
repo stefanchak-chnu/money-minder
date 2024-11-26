@@ -10,5 +10,5 @@ services:
       - "C:/space/docker-volumes/db/money-minder:/var/lib/postgresql/data"
     environment:
       - POSTGRES_DB=money-minder
-      - POSTGRES_USER=stef
+      - POSTGRES_USER=root
       - POSTGRES_PASSWORD=rootadmin
