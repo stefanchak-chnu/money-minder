@@ -1,0 +1,41 @@
+.card-container {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  height: 180px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  padding: 0.8rem 0.8rem;
+  font-size: 1.05rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .name {
+    width: 100%;
+    text-align: start;
+  }
+
+  .balance {
+    width: 100%;
+    text-align: end;
+  }
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
+.black-card {
+  background: #1d1d1e;
+  color: white;
+}
+
+.white-card {
+  background: #d6e0ff;
+}
+
+.fop-card {
+  background: #ebf2ff;
+}

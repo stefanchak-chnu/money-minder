@@ -1,0 +1,28 @@
+<div class="page-mask" (click)="closeModal()" *ngIf="isOpened"></div>
+
+<div class="spaces-container bottom-modal" *ngIf="isOpened" [@bottomModalOpenClose] (swiperight)="onSwipeRight()">
+  <div class="spaces-container-header">
+    <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+    <div><b>Spaces</b></div>
+    <div></div>
+  </div>
+  <div class="spaces-container-body">
+    <div class="space" *ngFor="let space of spaces">
+      <div class="space-header"
+           [ngClass]="{'active': space.id === currentSpace?.id}"
+           (click)="switchToSpace(space.id)">
+        <div class="space-header-icon">{{ space?.name?.slice(0, 1) }}</div>
+        <div>{{ space.name }}</div>
+      </div>
+      <div (click)="editSpace(space)">
+        <mat-icon svgIcon="edit" class="gray-icon small-icon clickable"></mat-icon>
+      </div>
+    </div>
+    <div class="add-space" (click)="createSpace()">
+      <mat-icon svgIcon="add-circle" class="gray-icon small-icon"></mat-icon>
+      <div>Add new space</div>
+    </div>
+  </div>
+</div>
+
+<app-create-space></app-create-space>

@@ -1,0 +1,74 @@
+<div class="category-settings-container right-modal" *ngIf="isOpened" [@sideModalOpenClose]
+     (swiperight)="onSwipeRight()">
+  <div class="categories-header">
+    <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+    <div><b>Categories</b></div>
+    <mat-icon svgIcon="add-circle" class="active small-icon" (click)="addCategory()"></mat-icon>
+  </div>
+  <div class="tab-buttons">
+    <button class="tab-button" (click)="selectExpenseTab()"
+            [class.active-tab]="isExpenseTabActive">Expense categories
+    </button>
+    <button class="tab-button" (click)="selectIncomeTab()"
+            [class.active-tab]="isIncomeTabActive">Income categories
+    </button>
+  </div>
+  <div class="categories-body">
+    <app-loader *ngIf="incomeCategories.length == 0"></app-loader>
+
+    <div class="tab-content">
+      <div class="tab-pane" [class.active-tab]="isExpenseTabActive">
+        <div class="category-container" (click)="viewCategory(category)" *ngFor="let category of expenseCategories">
+          <div class="category">
+            <div class="category-body">
+              <div class="category-icon-container">
+                <mat-icon svgIcon="{{category.icon}}" class="small-icon"></mat-icon>
+              </div>
+              <div class="category-title">{{ category.name }}</div>
+            </div>
+            <div class="category-footer">
+              <mat-icon svgIcon="hamburger-menu" class="small-icon gray-icon"></mat-icon>
+            </div>
+          </div>
+          <div class="sub-category" (click)="viewSubCategory(subCategory)"
+               *ngFor="let subCategory of category.subCategories">
+            <div class="category">
+              <div class="category-body">
+                <div class="category-icon-container">
+                  <mat-icon svgIcon="{{subCategory.icon}}" class="small-icon"></mat-icon>
+                </div>
+                <div class="category-title">{{ subCategory.name }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" [class.active-tab]="isIncomeTabActive">
+        <div class="category-container" (click)="viewCategory(category)" *ngFor="let category of incomeCategories">
+          <div class="category">
+            <div class="category-body">
+              <div class="category-icon-container">
+                <mat-icon svgIcon="{{category.icon}}" class="small-icon"></mat-icon>
+              </div>
+              <div class="category-title">{{ category.name }}</div>
+            </div>
+            <div class="category-footer">
+              <mat-icon svgIcon="hamburger-menu" class="small-icon gray-icon"></mat-icon>
+            </div>
+          </div>
+          <div class="sub-category" (click)="viewSubCategory(subCategory)"
+               *ngFor="let subCategory of category.subCategories">
+            <div class="category">
+              <div class="category-body">
+                <div class="category-icon-container">
+                  <mat-icon svgIcon="{{subCategory.icon}}" class="small-icon"></mat-icon>
+                </div>
+                <div class="category-title">{{ subCategory.name }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="net-worth-container" [ngClass]="{'p-b-05': netWorth === undefined || netWorth.histories.length < 2}">
+  <div class="net-worth-header">
+    <p>Net worth in {{ currentDate | date: 'MMMM' }}</p>
+  </div>
+  <div class="net-worth-sum">
+    <b>{{ (netWorth?.totalAccountsBalance || 0).toLocaleString() }} {{ netWorth?.primaryCurrency?.sign }}</b>
+  </div>
+  <div class="net-worth-graphic"
+       *ngIf="netWorth !== undefined && netWorth?.histories !== undefined && netWorth.histories.length > 1">
+    <apx-chart
+      [series]="series"
+      [labels]="labels"
+      [grid]="chartOptions.grid"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [stroke]="chartOptions.stroke"
+      [dataLabels]="chartOptions.dataLabels"
+      [yaxis]="chartOptions.yaxis"
+      [legend]="chartOptions.legend"
+    ></apx-chart>
+  </div>
+</div>

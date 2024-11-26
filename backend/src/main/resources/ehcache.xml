@@ -1,0 +1,17 @@
+<config
+        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xmlns='http://www.ehcache.org/v3'
+        xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core.xsd">
+
+    <cache-template name="default">
+        <expiry>
+            <ttl unit="minutes">30</ttl>
+        </expiry>
+        <resources>
+            <heap>500</heap>
+        </resources>
+    </cache-template>
+
+    <cache alias="exchangeRates" uses-template="default"/>
+
+</config>

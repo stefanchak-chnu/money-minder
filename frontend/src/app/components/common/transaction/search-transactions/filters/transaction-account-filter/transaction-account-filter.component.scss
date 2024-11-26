@@ -1,0 +1,78 @@
+.account-filter-container {
+  max-height: 90vh;
+  height: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+
+  .account-filter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--secondary-border);
+    padding-bottom: 0.4rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .account-filter-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 1.5rem;
+    width: 100%;
+
+    .account {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--secondary-border);
+      width: 100%;
+      padding: 0.4rem 0;
+      cursor: pointer;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .account-item-header {
+      background-color: #b1c8fc;
+      border-radius: 50%;
+      height: 100%;
+      width: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #FBFBFE;
+
+      .small-icon {
+        transform: scale(0.6);
+      }
+    }
+
+    .account-item {
+      flex: 0 0 auto;
+    }
+
+    .account-item:nth-child(3) {
+      margin-left: auto;
+    }
+  }
+
+  .account-filter-footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid var(--secondary-border);
+  }
+}

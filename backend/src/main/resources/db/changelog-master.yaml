@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - include:
+      file: classpath:/db/scripts/init.sql
+  - changeSet:
+      id: add_transaction_sync_date_column
+      author: stef003
+      changes:
+        - addColumn:
+            tableName: accounts
+            columns:
+              - column:
+                  name: transaction_sync_date
+                  type: timestamp
+                  defaultValue: NULL
+  - changeSet:
+      id: drop_transactions_currency_check
+      author: stef003
+      changes:
+        - sql:
+            alter table transactions drop constraint transactions_currency_check;
+  - changeSet:
+      id: add_currency_rate_column
+      author: stef003
+      changes:
+        - addColumn:
+            tableName: transactions
+            columns:
+              - column:
+                  name: currency_rate
+                  type: numeric(38, 2)
+                  defaultValue: NULL
+  - changeSet:
+      id: add_password_column
+      author: stef003
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: password
+                  type: varchar(255)
+                  defaultValue: NULL

@@ -1,0 +1,63 @@
+.rules-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.8rem;
+  }
+
+  &-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.5rem 0.8rem;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+      background-color: var(--background);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--accent);
+      border-radius: 8px;
+    }
+
+    .rule {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: start;
+      width: 100%;
+      border-radius: 6px;
+      background-color: var(--secondary);
+      padding: 0.8rem 1rem;
+      cursor: pointer;
+
+      .rule-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        padding: 7px;
+        background-color: var(--accent);
+        color: white;
+      }
+
+      .rule-body {
+        font-size: 14px;
+        color: var(--secondary-text);
+      }
+    }
+  }
+}

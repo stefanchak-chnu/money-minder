@@ -1,0 +1,31 @@
+<div class="page-mask" (click)="closeModal()"></div>
+
+<div class="date-filter-container bottom-modal" [@bottomModalOpenClose]>
+  <div class="date-filter-header">
+    <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+    <div><b>Select Timeframe</b></div>
+    <div class="active clickable" (click)="reset()">
+      <p *ngIf="dateFilterOption">Reset</p>
+      <p *ngIf="!dateFilterOption"></p>
+    </div>
+  </div>
+  <div class="date-filter-body">
+    <div class="input-date-container">
+      <input #dateFromInput type="date" [value]="dateFilterOption.dateFrom | date:'yyyy-MM-dd'"
+             (change)="applyInputDateFrom(dateFromInput.value)">
+      -
+      <input #dateToInput type="date" [value]="dateFilterOption.dateTo | date:'yyyy-MM-dd'"
+             (change)="applyInputDateTo(dateToInput.value)">
+    </div>
+    <div class="select-date-option" *ngFor="let dateOption of datesFilterOptions"
+         (click)="selectDateOption(dateOption)">
+      <div class=""><label>{{ dateOption.name }}</label></div>
+      <div class="">
+        <input type="radio" name="date" [value]="dateOption" [checked]="dateFilterOption === dateOption">
+      </div>
+    </div>
+  </div>
+  <div class="date-filter-footer">
+    <div class="save-button" (click)="apply()">Apply</div>
+  </div>
+</div>

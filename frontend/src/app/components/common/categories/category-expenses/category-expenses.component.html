@@ -1,0 +1,36 @@
+<div class="category-expenses-view-container right-modal" *ngIf="isOpen" [@sideModalOpenClose] (swiperight)="onSwipeRight()">
+  <div class="view-category-expenses-header">
+    <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+    <div></div>
+  </div>
+
+  <div class="view-category-expenses-body" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="150"
+       [scrollWindow]="false" (scrolled)="loadMore()">
+    <div class="category-expenses-icon">
+      <mat-icon svgIcon="{{ topExpense?.category ? topExpense?.category?.icon : 'question' }}" class="icon"></mat-icon>
+    </div>
+    <div class="category-expenses-info">
+      <div class="category-expenses-name">
+        <div><b>{{ topExpense?.category ? topExpense?.category?.name : 'Uncategorized expense' }}</b></div>
+      </div>
+      <div class="category-expenses-balance">
+        <div class="secondary-text">Total expenses in June</div>
+        <div><b>{{ (topExpense?.total || 0).toLocaleString() }} {{ totalExpenseCurrencySign }}</b></div>
+      </div>
+    </div>
+
+    <div class="category-expenses-transactions">
+      <div class="category-expenses-transactions-header">
+        <div>Transaction history</div>
+        <mat-icon svgIcon="search" class="gray-icon small-icon active" (click)="openSearch()"></mat-icon>
+      </div>
+      <div class="category-expenses-transactions-body">
+        <app-transaction *ngFor="let transaction of transactions" [transaction]="transaction"></app-transaction>
+        <app-loader *ngIf="isLoading"></app-loader>
+        <div class="no-transactions" *ngIf="!transactions || transactions.length === 0">
+          No transactions yet
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

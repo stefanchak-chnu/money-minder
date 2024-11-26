@@ -1,0 +1,24 @@
+<div class="banks-container right-modal" *ngIf="isOpened" [@sideModalOpenClose] (swiperight)="onSwipeRight()">
+  <div class="banks-container-header">
+    <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+    <div><b>Connected institutions</b></div>
+    <div></div>
+  </div>
+
+  <div class="banks-container-body">
+
+    <div class="connect-bank-container" *ngIf="banks.length == 0">
+      <div class="connect-bank-container-header">Connect your first institution</div>
+      <div class="secondary-header-text">Connect your bank to sync transactions automatically</div>
+      <div class="save-button" (click)="openConnectBankModal()">Connect</div>
+    </div>
+
+    <div *ngIf="banks.length > 0">
+      <div class="bank-container" *ngFor="let bank of banks" (click)="openViewBankModal(bank)">
+        {{ bank.name }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-select-new-bank *ngIf="isOpened"></app-select-new-bank>

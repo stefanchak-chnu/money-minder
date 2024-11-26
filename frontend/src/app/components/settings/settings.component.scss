@@ -1,0 +1,56 @@
+.settings-container {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0.8rem;
+  flex-direction: column;
+  gap:0.5rem;
+  width: 100%;
+
+  .accounting-settings {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem 0.8rem;
+    background-color: var(--secondary);
+    border-radius: 8px;
+
+    .accounting-settings-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      .accounting-settings-item-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0.4rem 0;
+        border-bottom: 1px solid var(--secondary-border);
+        cursor: pointer;
+        font-size: 14px;
+
+        &:active {
+          transform: scale(1.02);
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .accounting-settings-item-header {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .accounting-settings-item-footer {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+<div class="transaction" [ngClass]="{'no-border': isLast}" (click)="openTransactionView(transaction)">
+  <div class="transaction-group">
+    <div class="transaction-header" *ngIf="transaction.category">
+      <mat-icon svgIcon="{{transaction.category.icon}}" class="small-icon"></mat-icon>
+    </div>
+    <div class="transaction-header" *ngIf="!transaction.category && !transaction.toAccount">
+      <mat-icon svgIcon="question" class="small-icon"></mat-icon>
+    </div>
+    <div class="transaction-header" *ngIf="!transaction.category && transaction.toAccount">
+      <mat-icon svgIcon="transfer" class="small-icon"></mat-icon>
+    </div>
+    <div class="transaction-body">
+      <div class="transaction-title">{{ transaction.name }}</div>
+      <div class="transaction-account secondary-text">
+        <div class="transaction-account-names" *ngIf="transaction.type !== TransactionType.TRANSFER">
+          <mat-icon svgIcon="{{ transaction.account.type.iconName }}" class="transaction-account-icon"></mat-icon>
+          <div>{{ transaction.account.name }}</div>
+        </div>
+
+        <div class="transaction-account-names" *ngIf="transaction.type === TransactionType.TRANSFER">
+          <mat-icon svgIcon="{{ transaction.fromAccount?.type?.iconName }}" class="transaction-account-icon"></mat-icon>
+          <div class="transaction-account-name">{{ transaction.fromAccount?.name }}</div>
+          <mat-icon svgIcon="arrow-right" class="transaction-account-icon" *ngIf="transaction.toAccount"></mat-icon>
+          <mat-icon svgIcon="{{ transaction.toAccount?.type?.iconName }}" class="transaction-account-icon"></mat-icon>
+          <div class="transaction-account-name">{{ transaction.toAccount?.name }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="transaction-tail">
+    <div class="transaction-amount">
+      <span [ngClass]="{'transaction-amount-income': transaction.type === TransactionType.INCOME,
+        'transaction-amount-transfer': transaction.type === TransactionType.TRANSFER}">
+        {{ (transaction.amount || 0).toLocaleString() }} {{ transaction.currency.sign }}</span>
+    </div>
+    <div class="secondary-text">{{ transaction.date | date: 'dd.MM.yyyy' }}</div>
+  </div>
+</div>

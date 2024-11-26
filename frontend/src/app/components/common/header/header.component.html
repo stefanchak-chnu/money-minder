@@ -1,0 +1,20 @@
+<div class="header-container">
+
+  <div class="space" (click)="openSpaces()">
+    <div class="space-body">
+      <div class="space-icon">
+        {{ space?.name?.slice(0, 1) }}
+      </div>
+      <div>{{ space?.name }}</div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <mat-icon svgIcon="add-circle" class="icon small-icon active" *ngIf="showAdd"
+    (click)="openAddTypeModal()"></mat-icon>
+    <mat-icon svgIcon="reorder" class="icon small-icon" *ngIf="showEditTopExpenses" (click)="editTopExpenses()"></mat-icon>
+    <mat-icon svgIcon="reload" class="icon small-icon" *ngIf="showReload" (click)="refresh()"></mat-icon>
+    <mat-icon svgIcon="user" class="icon small-icon" *ngIf="showUser" (click)="openProfile()"></mat-icon>
+  </div>
+
+</div>

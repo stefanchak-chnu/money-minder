@@ -1,0 +1,15 @@
+<div class="page-mask" *ngIf="isOpened" (click)="closeModal()"></div>
+
+<div class="select-account-type-container bottom-modal" *ngIf="isOpened" [@bottomModalOpenClose]>
+  <div class="row" *ngFor="let row of [].constructor(typesRows); let i = index;">
+    <div class="type-item"
+         *ngFor="let type of typesSelect.slice(i * 2, i * 2 + 2);"
+         (click)="createAccountWithType(type)">
+      <mat-icon svgIcon="{{type.iconName}}"></mat-icon>
+      <div>{{ type.fullName }}</div>
+    </div>
+  </div>
+
+  <app-select-bank-account-input-method></app-select-bank-account-input-method>
+</div>
+

@@ -1,0 +1,42 @@
+.link-monobank-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.8rem 0 0.8rem;
+  }
+
+  &-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    gap: 1rem;
+    padding: 0.5rem 0.8rem;
+    text-align: center;
+
+    .secondary-header-text {
+      text-align: start;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.18rem 0.4rem;
+      border-radius: 5px;
+      border: 1px solid var(--secondary-border);
+      outline: none;
+      font-weight: 550;
+      text-align: start;
+
+      &:focus {
+        border: 1px solid var(--accent);
+      }
+    }
+  }
+}

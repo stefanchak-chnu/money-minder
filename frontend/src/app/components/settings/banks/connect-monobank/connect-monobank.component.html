@@ -1,0 +1,23 @@
+<div class="link-monobank-container right-modal" *ngIf="isOpened" [@sideModalOpenClose] (swiperight)="onSwipeRight()">
+  <div class="link-monobank-container-header">
+    <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+    <div><b>Monobank</b></div>
+    <div></div>
+  </div>
+
+  <div class="link-monobank-container-body">
+
+    <div>Monobank API token</div>
+    <div class="secondary-header-text">In order to link Monobank institution to your Money Minder space, you need to get
+      API
+      token from <a href="https://api.monobank.ua/index.html" target="_blank">https://api.monobank.ua</a>. Create
+      token and insert into the input
+    </div>
+
+    <input [(ngModel)]="token">
+
+    <div class="save-button" (click)="connectMonoBank()">
+      Connect
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+
+<div class="accounts-container">
+  <app-net-worth-widget></app-net-worth-widget>
+  <div class="account-container" *ngFor="let type of types">
+    <div class="account-type">
+      <div class="account-type-header">
+        <div class="account-type-header-item"><b>{{ type.name }}</b></div>
+        <div
+          class="account-type-header-item">{{ (type.totalBalance || 0).toLocaleString() }} {{ type.primaryCurrency.sign }}
+        </div>
+      </div>
+      <div class="account-type-body">
+        <div *ngFor="let account of type.accounts" class="account" (click)="openAccountView(account)">
+          <div class="account-item-header">
+            <mat-icon svgIcon="{{account?.type?.iconName}}" class="account-icon"></mat-icon>
+          </div>
+          <div class="account-item">{{ account.name }}</div>
+          <div class="account-item">{{ (account.balance || 0).toLocaleString() }} {{ account.currency.sign }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

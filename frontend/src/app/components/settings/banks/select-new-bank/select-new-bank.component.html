@@ -1,0 +1,40 @@
+<div class="select-bank-container right-modal" *ngIf="isOpened" [@sideModalOpenClose] (swiperight)="onSwipeRight()">
+  <div class="select-bank-container-header">
+    <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+    <div><b>Let's connect your bank account</b></div>
+    <div></div>
+  </div>
+
+  <div class="select-bank-container-body">
+
+    <div class="text-header">Import historical data and sync new transactions automatically instead of
+      entering them manually
+    </div>
+
+    <div class="security-concerns">
+      <div class="security-concerns-header">
+        <mat-icon svgIcon="shield-key" class="active small-icon"></mat-icon>
+        <div>Security concerns</div>
+      </div>
+      <div class="secondary-header-text">When you connect your institution, you allow Money Minder app to read your
+        transactions history. However, we
+        are not able to initiate any payments on your behalf or view your information. Your data is safe and private.
+        You can delete your data completely from our serves at any time.
+      </div>
+    </div>
+
+    <div class="choose-bank">
+      <select class="active" [(ngModel)]="selectedBank">
+        <option *ngFor="let bank of bankOptions, let i = index"
+                [ngValue]="bank"
+                [selected]="i == 0 ? true : null">{{ bank }}
+        </option>
+      </select>
+      <div class="save-button" (click)="selectBank()">
+        Choose bank
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-connect-monobank *ngIf="isOpened"></app-connect-monobank>

@@ -1,0 +1,172 @@
+[
+  {
+    "name": "Bills",
+    "icon": "bills",
+    "position": 0,
+    "type": "EXPENSE",
+    "subCategories": [
+      {
+        "name": "Gas",
+        "icon": "flame",
+        "position": 0,
+        "type": "EXPENSE"
+      },
+      {
+        "name": "Electricity",
+        "icon": "bolt",
+        "position": 1,
+        "type": "EXPENSE"
+      },
+      {
+        "name": "Water",
+        "icon": "bottle",
+        "position": 3,
+        "type": "EXPENSE"
+      },
+      {
+        "name": "Mobile",
+        "icon": "sim-card",
+        "position": 4,
+        "type": "EXPENSE"
+      },
+      {
+        "name": "Internet",
+        "icon": "global",
+        "position": 5,
+        "type": "EXPENSE"
+      }
+    ]
+  },
+  {
+    "name": "Fees",
+    "icon": "percent",
+    "position": 1,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Taxes",
+    "icon": "percent",
+    "position": 2,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Charity",
+    "icon": "heart",
+    "position": 3,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Groceries",
+    "icon": "cart",
+    "position": 4,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Eating out",
+    "icon": "cutlery",
+    "position": 5,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Electronics",
+    "icon": "mouse",
+    "position": 6,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Delivery",
+    "icon": "delivery",
+    "position": 7,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Gifts",
+    "icon": "gift",
+    "position": 8,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Digital",
+    "icon": "laptop",
+    "position": 9,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Subscriptions",
+    "icon": "clock",
+    "position": 10,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Gym",
+    "icon": "gym",
+    "position": 11,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Haircut",
+    "icon": "chair",
+    "position": 12,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Health",
+    "icon": "heart-pulse",
+    "position": 13,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Transport",
+    "icon": "bus",
+    "position": 14,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Entertainment",
+    "icon": "gamepad",
+    "position": 15,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Exchange",
+    "icon": "safe",
+    "position": 16,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Home",
+    "icon": "home",
+    "position": 17,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Rent",
+    "icon": "home-2",
+    "position": 18,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Other expense",
+    "icon": "graph-down",
+    "position": 19,
+    "type": "EXPENSE"
+  },
+  {
+    "name": "Salary",
+    "icon": "money-bag",
+    "position": 0,
+    "type": "INCOME"
+  },
+  {
+    "name": "Exchange",
+    "icon": "safe",
+    "position": 1,
+    "type": "INCOME"
+  },
+  {
+    "name": "Other income",
+    "icon": "graph-up",
+    "position": 2,
+    "type": "INCOME"
+  }
+]

@@ -1,0 +1,156 @@
+<div class="page-mask" (click)="closeModal()" *ngIf="isOpened"></div>
+
+<div class="transaction-view-container bottom-modal" *ngIf="isOpened" [@bottomModalOpenClose]
+     (swiperight)="onSwipeRight()">
+  <form [formGroup]="transactionForm">
+    <div class="transaction-view-header">
+      <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+      <mat-icon svgIcon="delete" class="red-icon small-icon"
+                (click)="delete()"
+                *ngIf="!transaction.isBankTransaction"></mat-icon>
+    </div>
+
+    <div class="transaction-header">
+      <div class="transaction-amount"
+           [ngClass]="{'income-color': transactionForm.controls['type'].value == TransactionType.INCOME}">
+        <b>
+          {{ this.transactionForm.controls['amount'].value | number:'1.2-2' }} {{ transaction.currency.sign }}
+        </b>
+      </div>
+      <div *ngIf="!editName; else nameInputTemplate" class="transaction-name"
+           (click)="editName = true">{{ transactionForm.value.name }}
+      </div>
+      <ng-template #nameInputTemplate>
+        <input #nameInput class="transaction-name-input" placeholder="Transaction name" formControlName="name"
+               (blur)="inputTransactionNameBlur()">
+      </ng-template>
+      <div class="transaction-secondary-header">
+        <div class="transaction-type"
+             [ngClass]="{
+                 'expense': transactionForm.controls['type'].value == TransactionType.EXPENSE,
+                 'income': transactionForm.controls['type'].value == TransactionType.INCOME,
+                 'transfer': transactionForm.controls['type'].value == TransactionType.TRANSFER
+               }">
+          {{ transactionForm.controls['type'].value.toLowerCase() }}
+        </div>
+        <div class="transaction-date">
+          <input #dateInput type="date" [value]="transactionForm.value.date | date:'yyyy-MM-dd'"
+                 (change)="transactionForm.patchValue({date: dateInput.value})"
+                 [disabled]="transaction.isBankTransaction"
+                 [ngClass]="{'disabled-date-input': transaction.isBankTransaction}">
+        </div>
+      </div>
+    </div>
+    <div class="transaction-body">
+      <div class="transaction-account" *ngIf="transactionForm.controls['type'].value !== TransactionType.TRANSFER">
+        <div class="icon-container">
+          <mat-icon svgIcon="{{ transaction.account.type.iconName }}" class="icon"></mat-icon>
+        </div>
+        <div class="transaction-account-body">
+          <div class="secondary-text">Account</div>
+          <div>{{ transaction.account.name }}</div>
+        </div>
+      </div>
+      <div class="transaction-account clickable"
+           *ngIf="transactionForm.controls['type'].value === TransactionType.TRANSFER"
+           (click)="openFromAccountFilter()">
+        <div class="icon-container">
+          <mat-icon svgIcon="{{this.transactionForm.controls['fromAccount'].value?.type?.iconName }}"
+                    class="icon"></mat-icon>
+        </div>
+        <div class="transaction-account-body">
+          <div class="secondary-text">From account</div>
+          <div
+            *ngIf="transactionForm.controls['fromAccount'].value">{{ transactionForm.controls['fromAccount'].value?.name }}
+          </div>
+          <div *ngIf="!transactionForm.controls['fromAccount'].value">Select</div>
+        </div>
+      </div>
+      <div class="transaction-to-account" *ngIf="transactionForm.controls['type'].value === TransactionType.TRANSFER">
+        <div class="transaction-to-account-header" (click)="openToAccountFilter()">
+          <div class="icon-container">
+            <mat-icon svgIcon="{{ transactionForm.controls['toAccount'].value?.type?.iconName }}"
+                      class="icon"></mat-icon>
+          </div>
+          <div class="transaction-to-account-body">
+            <div class="secondary-text">To account</div>
+            <div
+              *ngIf="transactionForm.controls['toAccount'].value">{{ transactionForm.controls['toAccount'].value?.name }}
+            </div>
+            <div *ngIf="!transactionForm.controls['toAccount'].value">Select</div>
+          </div>
+        </div>
+        <div>
+          <input #amountInput appAutoResize formControlName="amount"
+                 type="number" min="0.00"
+                 (blur)="formatAmount()"> {{ transaction.currency.sign }}
+        </div>
+      </div>
+      <div class="transaction-category" *ngIf="transactionForm.controls['type'].value !== TransactionType.TRANSFER">
+        <div class="transaction-category-header" (click)="selectCategory()">
+          <div class="icon-container">
+            <mat-icon svgIcon="{{ transaction.category?.icon?? 'question' }}" class="icon"></mat-icon>
+          </div>
+          <div class="transaction-account-body">
+            <div class="secondary-text">Category</div>
+            <div *ngIf="transaction.category"><b>{{ transaction.category.name }}</b></div>
+            <div *ngIf="!transaction.category">
+              <b>Uncategorized {{ transactionForm.controls['type'].value.toLowerCase() }}</b>
+            </div>
+          </div>
+        </div>
+        <div>
+          <input #amountInput appAutoResize formControlName="amount"
+                 type="number" min="0.00"
+                 (blur)="formatAmount()"> {{ transaction.currency.sign }}
+        </div>
+      </div>
+      <div class="transaction-convert">
+        <div class="transaction-convert-header">
+          <mat-icon svgIcon="login-2" class="small-icon"></mat-icon>
+          <div class="clickable hover" *ngIf="transactionForm.controls['type'].value === TransactionType.TRANSFER"
+               (click)="showExpensesView()">
+            Convert to expense
+          </div>
+          <div class="clickable hover" *ngIf="transactionForm.controls['type'].value !== TransactionType.TRANSFER"
+               (click)="showTransferView()">Convert to transfer
+          </div>
+        </div>
+        <div class="converted-warning" *ngIf="transactionForm.controls['type'].value !== transaction.type">converted
+        </div>
+      </div>
+      <div class="transaction-notes">
+        <div class="notes-icon-container">
+          <mat-icon svgIcon="textarea" class="notes-icon"></mat-icon>
+        </div>
+        <div class="notes-textarea-container">
+          <textarea placeholder="Notes" formControlName="notes"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="transaction-footer">
+      <div class="save-button" (click)="save()">Save</div>
+    </div>
+  </form>
+</div>
+
+<app-transaction-account-filter
+  *ngIf="isFromAccountFilterOpened && isOpened"
+  [selectedAccount]="transactionForm.controls['fromAccount'].value"
+  [skipBankAccounts]="!transaction.isBankTransaction"
+  (closed)="closeFromAccountFilter()"
+  (accountSelected)="onFromAccountSelected($event)"
+></app-transaction-account-filter>
+
+<app-transaction-account-filter
+  *ngIf="isToAccountFilterOpened && isOpened"
+  [selectedAccount]="transactionForm.controls['toAccount'].value"
+  [skipBankAccounts]="!transaction.isBankTransaction"
+  (closed)="closeToAccountFilter()"
+  (accountSelected)="onToAccountSelected($event)"
+></app-transaction-account-filter>
+
+<app-categories *ngIf="isCategorySelectModalOpened && isOpened"
+                [type]="this.transactionForm.controls['type'].value === TransactionType.EXPENSE ? CategoryType.EXPENSE : CategoryType.INCOME"
+                (selectedCategory)="onCategorySelected($event)">
+</app-categories>

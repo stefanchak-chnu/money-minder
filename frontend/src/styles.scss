@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --background: #fbfcff;
+  --primary: #2c22e8;
+  --secondary: #dce9fd;
+  --secondary-border: #edf2fd;
+  --secondary-text: #535355;
+  --text-color: #2e2e2e;
+  --accent: #1f7efd;
+  --accent-2: #394afd;
+  --income: #3dc34f;
+  --expense: #ffb51a;
+}
+
+body {
+  background: var(--background);
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 16px;
+  color: var(--text-color);
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    background-color: var(--background);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    border-radius: 8px;
+  }
+}
+
+// inputs
+input {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 16px;
+}
+
+select {
+  border-radius: 5px;
+  border: 1px solid var(--secondary-border);
+  padding: 0.12rem 0.2rem;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 14px;
+}
+
+option {
+  margin: 0.2rem 0.2rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.checkbox-wrapper .checkbox {
+  appearance: none;
+  border: 1px solid var(--secondary-border);
+  border-radius: 10px;
+  flex-shrink: 0;
+  height: 20px;
+  width: 30px;
+  margin-top: auto;
+  margin-bottom: auto;
+  position: relative;
+  cursor: pointer;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.checkbox-wrapper .checkbox,
+.checkbox-wrapper .checkbox::after {
+  transition: all 100ms ease-out;
+}
+
+.checkbox-wrapper .checkbox::after {
+  background-color: #fff;
+  border-radius: 50%;
+  content: "";
+  top: 3px;
+  left: 3px;
+  height: 13px;
+  width: 13px;
+  position: absolute;
+}
+
+.checkbox-wrapper input[type=checkbox] {
+  cursor: pointer;
+}
+
+.checkbox-wrapper .checkbox:checked {
+  background-color: var(--accent);
+}
+
+.checkbox-wrapper .checkbox:checked::after {
+  background-color: #fff;
+  left: 13px;
+}
+
+.checkbox-wrapper :focus:not(.focus-visible) {
+  outline: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+// icons
+.small-icon {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.large-icon {
+  transform: scale(1.6);
+}
+
+.gray-icon {
+  color: var(--secondary-text);
+}
+
+.red-icon {
+  color: #ff1e16;
+}
+
+.income-color {
+  color: var(--income);
+}
+
+.black-text {
+  color: #1e1e1e;
+}
+
+// paddings
+.p-l-4 {
+  padding-left: 4px;
+}
+
+// elements styles
+.active {
+  color: var(--accent);
+}
+
+.active-border {
+  border: 2px solid var(--accent) !important;
+}
+
+.hover {
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.secondary-text {
+  color: var(--secondary-text);
+  font-size: 14px;
+}
+
+.secondary-header-text {
+  color: var(--secondary-text);
+  font-size: 14px;
+}
+
+.no-border {
+  border-bottom: none !important;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+// tabs
+.tab-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  border-radius: 6px;
+  border: 2px solid var(--secondary-border);
+
+  .tab-button {
+    font-size: 14px;
+    font-family: "Nunito Sans", sans-serif;
+    border-radius: 6px;
+    flex: 1;
+    padding: 0.45rem 1rem;
+    border: none;
+    cursor: pointer;
+    background-color: var(--background);
+  }
+
+  .tab-button.active-tab {
+    color: white;
+    background-color: var(--accent);
+  }
+}
+
+.tab-content {
+
+  .tab-pane {
+    display: none;
+  }
+
+  .tab-pane.active-tab {
+    display: block;
+  }
+}
+
+// buttons
+.save-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #3b35dd;
+  height: 40px;
+  width: 100%;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background: #443dea;
+  }
+
+  &:active {
+    background: #322cd8;
+  }
+}
+
+.disabled-button {
+  cursor: not-allowed !important;
+  $disabled-color: darken(#534ced, 70%);
+  background-color: $disabled-color !important;
+}
+
+.not-visible {
+  visibility: hidden;
+}
+
+// modals
+
+// todo: add swipe gestures to close modals
+// todo: try to get free domain and setup ssl + add it under cloudflare
+
+.bottom-modal {
+  position: fixed;
+  bottom: 0;
+  background-color: var(--background);
+  border-top: 1px solid var(--secondary-border);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  z-index: 10;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.right-modal {
+  height: 100vh;
+  position: fixed;
+  bottom: 0;
+  background-color: var(--background);
+  border-top: 1px solid var(--secondary-border);
+  z-index: 10;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-mask {
+  background: rgba(17, 17, 17, 0.6);
+  backdrop-filter: blur(3px);
+  transition: background-color 0.15s ease-in-out;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+
+//animations
+
+@keyframes bubble {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in-scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+

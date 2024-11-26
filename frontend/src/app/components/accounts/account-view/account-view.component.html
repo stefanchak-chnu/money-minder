@@ -1,0 +1,43 @@
+<div class="account-view-container right-modal" *ngIf="isOpen" [@sideModalOpenClose]>
+  <div class="view-account-header">
+    <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+    <div class="edit-button" (click)="editModal()">Edit</div>
+  </div>
+
+  <div class="view-account-body" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="150"
+       [scrollWindow]="false" (scrolled)="loadMore()">
+    <div class="account-icon">
+      <mat-icon svgIcon="{{account?.type?.iconName}}" class="icon"></mat-icon>
+    </div>
+    <div class="account-info">
+      <div class="account-description secondary-text">
+        <div>{{ account?.description }}</div>
+      </div>
+      <div class="account-name">
+        <div><b>{{ account?.name }}</b></div>
+      </div>
+      <div class="account-balance">
+        <div class="secondary-text">Current balance</div>
+        <div><b>{{ (account?.balance || 0).toLocaleString() }} {{ account?.currency?.sign }}</b></div>
+      </div>
+    </div>
+
+    <div class="account-transactions">
+      <div class="account-transactions-header">
+        <div>Transaction history</div>
+        <mat-icon svgIcon="search" class="gray-icon small-icon active" (click)="openSearch()"></mat-icon>
+      </div>
+      <div class="account-transactions-body">
+        <app-transaction *ngFor="let transaction of accountTransactions" [transaction]="transaction"></app-transaction>
+        <app-loader *ngIf="isLoading"></app-loader>
+        <div class="no-transactions" *ngIf="!accountTransactions || accountTransactions.length === 0">
+          No transactions yet
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-create-transaction-button *ngIf="!account?.isBankAccount"
+                                 [preSelectedAccount]="account"></app-create-transaction-button>
+</div>
+
+<app-update-account></app-update-account>

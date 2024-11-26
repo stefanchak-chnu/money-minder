@@ -1,0 +1,88 @@
+
+.transaction {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--secondary-border);
+  cursor: pointer;
+
+  &:active {
+    transform: scale(1.02);
+  }
+
+  .transaction-group {
+    display: flex;
+    align-items: center;
+
+    .transaction-header {
+      height: 33px;
+      width: 33px;
+      min-width: 33px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--accent);
+      color: #FBFBFE;
+    }
+
+    .transaction-body {
+      padding-left: 8px;
+      padding-right: 8px;
+
+      .transaction-title {
+        font-size: 14px;
+      }
+
+      .transaction-account-names {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        flex-wrap: nowrap;
+        text-overflow: ellipsis;
+        gap: 2px;
+
+        .transaction-account-icon {
+          height: 15px;
+          width: 14px;
+          margin-bottom: 3px;
+        }
+      }
+    }
+  }
+
+  .transaction-tail {
+    text-align: end;
+
+    .transaction-amount {
+      font-size: 14px;
+    }
+
+    .transaction-amount-income {
+      color: var(--income);
+    }
+
+    .transaction-amount-transfer {
+      color: var(--accent);
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .transaction-title {
+    max-width: 230px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+  }
+
+  .transaction-account-name {
+    max-width: 90px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+  }
+}
+

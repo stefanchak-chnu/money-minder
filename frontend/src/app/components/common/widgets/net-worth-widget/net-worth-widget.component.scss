@@ -1,0 +1,28 @@
+.net-worth-container {
+  background-color: var(--secondary);
+  width: 100%;
+  border-radius: 8px;
+  padding-top: 0.5rem;
+
+  .net-worth-header {
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+  }
+
+  .net-worth-sum {
+    padding-top: 0.1rem;
+    font-size: 1.05rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+  }
+
+  .net-worth-graphic {
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.p-b-05 {
+  padding-bottom: 0.5rem;
+}

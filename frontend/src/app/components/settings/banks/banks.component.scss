@@ -1,0 +1,59 @@
+.banks-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.8rem;
+  }
+
+  &-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    gap: 0.5rem;
+    padding: 0.5rem 0.8rem;
+
+    .connect-bank-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.2rem;
+      height: 80vh;
+
+      margin-top: 0;
+      margin-bottom: 0;
+
+      .save-button {
+        margin-top: 0.5rem;
+        width: 70%;
+      }
+    }
+
+    .bank-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      padding: 0.5rem 7rem;
+      background: var(--secondary);
+      border: 1px solid var(--secondary-border);
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+}
+
+.full-width {
+  width: 100%;
+}

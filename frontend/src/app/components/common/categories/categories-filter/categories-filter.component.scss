@@ -1,0 +1,106 @@
+.categories-filter-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+    height: 5vh;
+    border-bottom: 1px solid var(--secondary-border);
+  }
+
+  &-body {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.8rem 0.5rem 0.8rem;
+    overflow-y: auto;
+    height: 89vh;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+      background-color: var(--background);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--accent);
+      border-radius: 8px;
+    }
+
+    .category-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.3rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--secondary-border);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .category {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        .category-body {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .category-icon-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            background-color: var(--accent);
+            color: white;
+            padding: 4px;
+
+            .small-icon {
+              scale: (0.8);
+            }
+          }
+
+          .category-title {
+            color: black;
+            padding-left: 0.4rem;
+            padding-right: 0.4rem;
+          }
+        }
+
+        .category-footer {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      .sub-category {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0.3rem 2rem;
+        border-bottom: 1px solid var(--secondary-border);
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  .categories-filter-container-footer {
+    border-top: 1px solid var(--secondary-border);
+    padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+  }
+}

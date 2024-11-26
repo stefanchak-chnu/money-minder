@@ -1,0 +1,82 @@
+<div class="category-expenses-search-container right-modal" *ngIf="isOpen" [@sideModalOpenClose]
+     (swiperight)="onSwipeRight()">
+  <div class="search-category-expenses-header">
+    <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+    <div class="container-header-name" (click)="changeCategoriesType()">
+      <div><b>{{ categoryType === CategoryType.EXPENSE ? 'Expenses' : 'Incomes' }} by category</b></div>
+      <mat-icon svgIcon="alt-arrow-down" class="small-icon"></mat-icon>
+    </div>
+    <mat-icon svgIcon="sort" class="active small-icon" (click)="openCloseFilters()"></mat-icon>
+  </div>
+
+  <div class="search-category-expenses-filters" *ngIf="areFiltersOpen">
+    <div class="active clickable" (click)="resetFilters()">Reset</div>
+    <div class="filter" [ngClass]="{'active': dateFilter, 'active-border': dateFilter}"
+         (click)="openDateFilter()">{{ dateFilter?.name || 'All dates' }}
+    </div>
+    <div class="filter" [ngClass]="{'active': accountFilter, 'active-border': accountFilter}"
+         (click)="openAccountFilter()">{{ accountFilter?.name || 'All accounts' }}
+    </div>
+    <div class="filter"
+         [ngClass]="{'active': categoriesToIgnore.length > 0, 'active-border': categoriesToIgnore.length > 0}"
+         (click)="openCategoriesFilter()">{{ categoriesToIgnore.length > 0 ? 'Ignored categories' : 'All categories' }}
+    </div>
+  </div>
+
+  <div class="search-category-expenses-body">
+    <div class="total">
+      <div *ngIf="dateFilter?.name === datesFilterOptions[0].name">{{ dateFilter?.dateFrom | date: 'dd MMMM yyyy' }}
+        - {{ dateFilter?.dateTo | date: 'dd MMMM yyyy' }}
+      </div>
+      <div *ngIf="dateFilter?.name === datesFilterOptions[1].name">{{ dateFilter?.dateFrom | date: 'MMMM yyyy' }}</div>
+      <div
+        *ngIf="dateFilter?.name === datesFilterOptions[2].name || dateFilter?.name === datesFilterOptions[3].name">{{ dateFilter?.dateFrom | date: 'MMMM' }}
+        - {{ dateFilter?.dateTo | date: 'MMMM yyyy' }}
+      </div>
+      <div><h3>{{ (totalExpensesAmount || 0).toLocaleString() }} {{ totalExpenseCurrencySign }}</h3></div>
+    </div>
+
+    <app-loader *ngIf="isLoading"></app-loader>
+
+    <div class="category-expense" *ngFor="let topExpense of topExpenses"
+         (click)="openCategoryTransactionsView(topExpense)">
+      <div class="category-expense-header">
+        <div class="category-expense-icon">
+          <mat-icon svgIcon="{{ topExpense?.category? topExpense?.category?.icon : 'question' }}"
+                    class="small-icon"></mat-icon>
+        </div>
+        <div class="category-expense-name">
+          <span>{{ topExpense.category ? topExpense.category.name : 'Uncategorized expense' }}</span>
+          <span> - </span>
+          <span class="secondary-text"> {{ (topExpense.percentage | number:'1.2-2') + ' %' }}</span>
+        </div>
+      </div>
+
+      <div class="category-expense-amount">
+        <div>{{ (topExpense.total || 0).toLocaleString() }} {{ totalExpenseCurrencySign }}</div>
+        <mat-icon svgIcon="alt-arrow-right" class="small-icon gray-icon"></mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <app-transaction-account-filter
+    *ngIf="isAccountFilterOpened"
+    [selectedAccount]="accountFilter"
+    (closed)="closeAccountFilter()"
+    (accountSelected)="onAccountSelected($event)"
+  ></app-transaction-account-filter>
+
+  <app-transaction-date-filter
+    *ngIf="isDateFilterOpened"
+    [dateFilterOption]="dateFilter ? dateFilter : datesFilterOptions[0]"
+    (closed)="closeDateFilter()"
+    (dateFilterOptionSelected)="onDateSelected($event)"
+  ></app-transaction-date-filter>
+
+  <app-categories-filter
+    *ngIf="isCategoriesFilterOpened"
+    [categoryType]="categoryType"
+    [unselectedCategories]="categoriesToIgnore"
+    (categoriesUnselected)="onCategoriesUnselected($event)">
+  </app-categories-filter>
+</div>

@@ -1,0 +1,65 @@
+<div class="top-expenses-container">
+  <div class="top-expenses-header" (click)="openSearchTopExpenses()">
+    <div>Top expenses of {{ currentDate | date: 'MMMM' }}</div>
+    <div class="amount-and-settings">
+      <span>{{ (totalExpensesAmount || 0).toLocaleString() }} {{ totalExpenseCurrencySign }}</span>
+      <mat-icon svgIcon="confirm" class="confirm-icon active" *ngIf="isEditView" (click)="saveUnchecked($event)">
+      </mat-icon>
+    </div>
+  </div>
+  <div class="top-expenses-body">
+
+    <div *ngIf="!isEditView">
+      <div *ngFor="let topExpense of topExpensesWithoutHidden; let i = index">
+        <div class="top-expense" *ngIf="i < 12" (click)="openCategoryExpensesPage(topExpense)">
+          <div class="top-expense-header">
+            <mat-icon svgIcon="{{ topExpense.category ? topExpense.category.icon : 'question' }}"
+                      class="tiny-icon"></mat-icon>
+            <span>{{ topExpense.category ? topExpense.category.name : 'Uncategorized expense' }} </span>
+            <span> - </span>
+            <span class="secondary-text"> {{ (topExpense.percentage | number:'1.2-2') + ' %' }}</span>
+          </div>
+          <div class="amount-and-settings">
+            <div> {{ (topExpense.total || 0).toLocaleString() }} {{ totalExpenseCurrencySign }}</div>
+          </div>
+        </div>
+        <div class="top-expense other-top-expense" *ngIf="i == 12 && moreExpense !== undefined"
+             (click)="openSearchTopExpenses()">
+          <div class="top-expense-header">
+            <div></div>
+            <span>Others ... </span>
+            <span> - </span>
+            <span class="secondary-text"> {{ (moreExpense.percentage | number:'1.2-2') + ' %' }}</span>
+          </div>
+          <div>
+            <span> {{ (moreExpense.total || 0).toLocaleString() }} {{ totalExpenseCurrencySign }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="secondary-header-text" *ngIf="topExpensesWithoutHidden.length === 0">No expenses yet</div>
+    </div>
+
+    <div *ngIf="isEditView">
+      <div *ngFor="let topExpense of topExpenses">
+        <div class="top-expense" (click)="openCategoryExpensesPage(topExpense)">
+          <div class="top-expense-header">
+            <mat-icon svgIcon="{{ topExpense.category ? topExpense.category.icon : 'question' }}"
+                      class="tiny-icon"></mat-icon>
+            <span>{{ topExpense.category ? topExpense.category.name : 'Uncategorized expense' }} </span>
+            <span> - </span>
+            <span class="secondary-text"> {{ (topExpense.percentage | number:'1.2-2') + ' %' }}</span>
+          </div>
+          <div class="amount-and-settings">
+            <div> {{ (topExpense.total || 0).toLocaleString() }} {{ totalExpenseCurrencySign }}</div>
+            <div class="checkbox-wrapper" (click)="uncheckCategory($event, topExpense.category)">
+              <input type="checkbox" class="checkbox"
+                     [checked]="topExpense.category?.id === undefined || !this.hiddenCategories.includes(topExpense.category?.id!)">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="secondary-header-text" *ngIf="topExpenses.length === 0">No expenses yet</div>
+    </div>
+
+  </div>
+</div>

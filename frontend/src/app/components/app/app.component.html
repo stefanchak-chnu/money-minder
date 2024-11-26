@@ -1,0 +1,14 @@
+<app-header *ngIf="authService.isAuthenticated()"></app-header>
+<router-outlet/>
+<app-nav *ngIf="authService.isAuthenticated()"></app-nav>
+<app-spaces></app-spaces>
+<app-category-expenses></app-category-expenses>
+<app-search-category-expenses></app-search-category-expenses>
+<app-transaction-view></app-transaction-view>
+<app-search-transactions></app-search-transactions>
+<app-create-transaction></app-create-transaction>
+<app-select-account-type></app-select-account-type>
+<app-create-account></app-create-account>
+<app-account-view></app-account-view>
+<app-banks></app-banks>
+<app-link-monobank-account></app-link-monobank-account>

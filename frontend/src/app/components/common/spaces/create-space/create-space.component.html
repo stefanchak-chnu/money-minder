@@ -1,0 +1,26 @@
+<div class="create-space-container right-modal" *ngIf="isOpened" [@sideModalOpenClose] (swiperight)="onSwipeRight()">
+  <div class="create-space-container-header">
+    <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+    <div><b>Spaces</b></div>
+    <div class="clickable" [ngClass]="{'active': spaceName != ''}" (click)="save()">Save</div>
+  </div>
+  <div class="create-space-container-body">
+    <div class="space-name-section">
+      <div class="space-icon">{{ spaceName ? spaceName.slice(0, 1) : 'A' }}</div>
+      <input placeholder="Enter space name" [(ngModel)]="spaceName">
+    </div>
+    <div class="space-currency-section">
+      <div>Primary currency</div>
+      <div *ngIf="!spaceToEdit">
+        <select [(ngModel)]="currency">
+          <option *ngFor="let c of currencies"
+                  [ngValue]="c">{{ c.shortName }} {{ c.sign }}
+          </option>
+        </select>
+      </div>
+      <div *ngIf="spaceToEdit">
+        {{ spaceToEdit.primaryCurrency.shortName }} {{ spaceToEdit.primaryCurrency.sign }}
+      </div>
+    </div>
+  </div>
+</div>

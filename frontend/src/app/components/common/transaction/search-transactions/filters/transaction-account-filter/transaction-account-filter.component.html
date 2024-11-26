@@ -1,0 +1,26 @@
+<div class="page-mask" (click)="closeModal()"></div>
+
+<div class="account-filter-container bottom-modal" [@bottomModalOpenClose]>
+  <div class="account-filter-header">
+    <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+    <div><b>Select Account</b></div>
+    <div class="active clickable" (click)="reset()">
+      <p *ngIf="selectedAccount">Reset</p>
+      <p *ngIf="!selectedAccount"></p>
+    </div>
+  </div>
+  <div class="account-filter-body">
+    <div class="account" *ngFor="let account of accounts" (click)="selectAccount(account)">
+      <div class="account-item account-item-header">
+        <mat-icon svgIcon="wallet" class="icon small-icon"></mat-icon>
+      </div>
+      <div class="account-item p-l-4"><label>{{ account.name }}</label></div>
+      <div class="account-item">
+        <input type="radio" name="account" [value]="account.id" [checked]="selectedAccount?.id === account.id">
+      </div>
+    </div>
+  </div>
+  <div class="account-filter-footer">
+    <div class="save-button" (click)="apply()">Apply</div>
+  </div>
+</div>

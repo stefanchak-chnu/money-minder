@@ -1,0 +1,74 @@
+<div class="settings-container">
+
+  <div class="accounting-settings">
+
+    <div><b>Personal settings</b></div>
+
+    <div class="accounting-settings-container">
+      <div class="accounting-settings-item-container" (click)="openSpaces()">
+        <div class="accounting-settings-item-header">
+          <mat-icon svgIcon="spaces" class="small-icon active"></mat-icon>
+          Spaces
+        </div>
+        <mat-icon svgIcon="alt-arrow-right" class="small-icon"></mat-icon>
+      </div>
+
+      <div class="accounting-settings-item-container" (click)="openBanks()">
+        <div class="accounting-settings-item-header">
+          <mat-icon svgIcon="bank" class="small-icon active"></mat-icon>
+          Connected institutions
+        </div>
+        <mat-icon svgIcon="alt-arrow-right" class="small-icon"></mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="accounting-settings">
+
+    <div><b>Space settings</b></div>
+
+    <div class="accounting-settings-container">
+      <div class="accounting-settings-item-container" (click)="openCategorySettings()">
+        <div class="accounting-settings-item-header">
+          <mat-icon svgIcon="box" class="small-icon active"></mat-icon>
+          Categories
+        </div>
+        <mat-icon svgIcon="alt-arrow-right" class="small-icon"></mat-icon>
+      </div>
+
+      <div class="accounting-settings-item-container" (click)="openRulesSettings()">
+        <div class="accounting-settings-item-header">
+          <mat-icon svgIcon="clipboard-check" class="small-icon active"></mat-icon>
+          Automatic rules
+        </div>
+        <mat-icon svgIcon="alt-arrow-right" class="small-icon"></mat-icon>
+      </div>
+
+      <div class="accounting-settings-item-container" (click)="selectDefaultAccount()">
+        <div class="accounting-settings-item-header">
+          <mat-icon svgIcon="wallet-2" class="small-icon active"></mat-icon>
+          Default account
+        </div>
+        <div class="accounting-settings-item-footer">
+          <div class="gray-icon">
+            {{ defaultAccount?.name ?? 'Select' }}
+          </div>
+          <mat-icon svgIcon="alt-arrow-right" class="small-icon"></mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<app-transaction-account-filter
+  *ngIf="isAccountFilterOpened"
+  [selectedAccount]="this.defaultAccount"
+  [skipBankAccounts]="true"
+  (closed)="closeAccountFilter()"
+  (accountSelected)="onAccountSelected($event)"
+></app-transaction-account-filter>
+
+<app-category-settings></app-category-settings>
+<app-rules-settings></app-rules-settings>
+<app-profile></app-profile>

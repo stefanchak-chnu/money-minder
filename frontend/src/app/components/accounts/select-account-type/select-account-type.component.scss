@@ -1,0 +1,44 @@
+.select-account-type-container {
+  height: 240px;
+  width: 100%;
+  background: var(--background);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  .row {
+    display: flex;
+    width: 100%;
+    height: inherit;
+    gap: 1rem
+  }
+
+  .type-item {
+    background-color: var(--primary);
+    border-radius: 8px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #3b33d3;
+    }
+
+    &:active {
+      background-color: #463fd9;
+    }
+  }
+
+}
+
+

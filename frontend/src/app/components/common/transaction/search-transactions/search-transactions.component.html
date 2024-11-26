@@ -1,0 +1,54 @@
+<div class="transaction-search-container right-modal" *ngIf="isOpened" [@sideModalOpenClose]
+     (swiperight)="onSwipeRight()">
+  <div class="container-header">
+    <div>
+      <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+    </div>
+    <div>
+      <b>Transaction history</b>
+    </div>
+    <div>
+    </div>
+  </div>
+  <div class="search-header">
+    <div class="input-container">
+      <mat-icon svgIcon="search" class="gray-icon small-icon" (click)="search()"></mat-icon>
+      <input placeholder="Search by name or notes" [(ngModel)]="searchQuery" (keyup)="search()">
+    </div>
+    <div class="search-filters">
+      <div class="active clickable" (click)="resetFilters()">Reset</div>
+      <div class="filter" [ngClass]="{'active': dateFilter, 'active-border': dateFilter}"
+           (click)="openDateFilter()">{{ dateFilter?.name || 'All dates' }}
+      </div>
+      <div class="filter" [ngClass]="{'active': accountFilter, 'active-border': accountFilter}"
+           (click)="openAccountFilter()">{{ accountFilter?.name || 'All accounts' }}
+      </div>
+      <div class="filter" [ngClass]="{'active': needReviewFilter, 'active-border': needReviewFilter}"
+           (click)="applyNeedReviewFilter()">Need review
+      </div>
+      <div class="filter" [ngClass]="{'active': categoryFilter, 'active-border': categoryFilter}"
+           (click)="openCategoryFilter()">{{ categoryFilter?.name || 'All categories' }}
+      </div>
+    </div>
+  </div>
+  <div class="transactions-container" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="150"
+       [scrollWindow]="false" (scrolled)="loadMore()">
+    <app-transaction *ngFor="let transaction of transactions" [transaction]="transaction"></app-transaction>
+    <app-loader *ngIf="isLoading"></app-loader>
+  </div>
+  <app-create-transaction-button></app-create-transaction-button>
+</div>
+
+<app-transaction-account-filter
+  *ngIf="isAccountFilterOpened && isOpened"
+  [selectedAccount]="accountFilter"
+  (closed)="closeAccountFilter()"
+  (accountSelected)="onAccountSelected($event)"
+></app-transaction-account-filter>
+
+<app-transaction-date-filter
+  *ngIf="isDateFilterOpened && isOpened"
+  [dateFilterOption]="dateFilter ? dateFilter : datesFilterOptions[0]"
+  (closed)="closeDateFilter()"
+  (dateFilterOptionSelected)="onDateSelected($event)"
+></app-transaction-date-filter>

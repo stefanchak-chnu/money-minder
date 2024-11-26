@@ -1,0 +1,21 @@
+
+<div class="dashboard-container">
+
+  <app-top-expenses-widget></app-top-expenses-widget>
+
+  <div class="last-transactions-container">
+    <div class="last-transactions-header">
+      <div><b>Last 5 transactions</b></div>
+      <mat-icon svgIcon="calendar-search" class="small-icon active" (click)="openSearchTransactionsModal()"></mat-icon>
+    </div>
+    <div class="last-transactions-body">
+      <div *ngFor="let transaction of transactions; let i = index">
+        <app-transaction [transaction]="transaction" [isLast]="i === transactions.length - 1"></app-transaction>
+      </div>
+      <div class="secondary-header-text" *ngIf="transactions.length === 0">No transactions yet</div>
+      <app-loader *ngIf="isLoading"></app-loader>
+    </div>
+  </div>
+
+  <app-create-transaction-button></app-create-transaction-button>
+</div>

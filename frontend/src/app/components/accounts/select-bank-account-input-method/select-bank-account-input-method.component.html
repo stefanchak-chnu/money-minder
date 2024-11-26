@@ -1,0 +1,26 @@
+<div class="page-mask" *ngIf="isOpened" (click)="closeModal()"></div>
+
+<div class="select-bank-account-input-method-container bottom-modal" *ngIf="isOpened" [@bottomModalOpenClose]>
+  <div class="item" (click)="openAutomaticSyncModal()">
+    <mat-icon svgIcon="reload" class="active item-icon"></mat-icon>
+    <div>
+      <div>
+        <b>Automatic synchronization</b>
+      </div>
+      <div>
+        Connect to your financial institution and receive transaction and balance updated automatically
+      </div>
+    </div>
+  </div>
+  <div class="item" (click)="openManualInputModal()">
+    <mat-icon svgIcon="document-add" class="active item-icon"></mat-icon>
+    <div>
+      <div>
+        <b>Manual input</b>
+      </div>
+      <div>
+        Input and manage transactions manually
+      </div>
+    </div>
+  </div>
+</div>

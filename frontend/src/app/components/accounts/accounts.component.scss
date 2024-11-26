@@ -1,0 +1,92 @@
+.accounts-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  margin-bottom: 44px;
+  padding: 0.5rem 0.8rem;
+  gap: 0.5rem;
+  width: 100%;
+
+  .account-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    animation: fade-in-scale 0.3s ease-in-out;
+
+    .account-type {
+      background-color: var(--secondary);
+      width: 100%;
+      border-radius: 8px;
+
+      .account-type-header {
+        display: flex;
+        justify-content: end;
+        align-items: start;
+        border-bottom: 1px solid var(--secondary-border);
+        padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+        width: 100%;
+      }
+
+      .account-type-header > *:first-child {
+        flex: 1;
+      }
+
+      .account-type-header:nth-child(2) {
+        margin-left: auto;
+      }
+
+      .account-type-body {
+        padding: 0.1rem 0.8rem 0.2rem 0.8rem;
+      }
+
+      .account {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--secondary-border);
+        width: 100%;
+        padding: 0.4rem 0;
+        font-size: 14px;
+        cursor: pointer;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
+      .account-item-header {
+        background-color: var(--accent-2);
+        border-radius: 50%;
+        height: 27px;
+        width: 27px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        padding: 5px;
+
+        .account-icon {
+          transform: scale(0.9);
+        }
+      }
+
+      .account-item {
+        padding-left: 8px;
+        flex: 0 0 auto;
+      }
+
+      .account-item:nth-child(3) {
+        margin-left: auto;
+      }
+    }
+  }
+
+}
+
+app-net-worth-widget {
+  width: 100%;
+}

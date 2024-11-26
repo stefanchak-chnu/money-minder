@@ -1,0 +1,42 @@
+<div class="page-mask" (click)="closeModal()" *ngIf="isOpened"></div>
+
+<div class="update-account-container bottom-modal" *ngIf="isOpened" [@bottomModalOpenClose]>
+  <form [formGroup]="accountForm">
+    <div class="update-account-header">
+      <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+      <div><b>Edit account</b></div>
+      <div [ngClass]="{'active': accountForm.valid}" class="clickable" (click)="createAccount()">Save</div>
+    </div>
+    <div class="update-account-body">
+      <div class="account-icon">
+        <mat-icon svgIcon="wallet" class="large-icon"></mat-icon>
+      </div>
+      <div class="title-input">
+        <input placeholder="Enter account title" formControlName="title">
+      </div>
+      <div class="info-item">
+        <div>Account type</div>
+        <div>{{ account?.type?.fullName }}</div>
+      </div>
+      <div class="info-item">
+        <div>Currency</div>
+        <div>
+          <select formControlName="currency">
+            <option *ngFor="let currency of currencies, let i = index"
+                    [ngValue]="currency"
+                    [selected]="currency.code === account?.currency?.code ? true : null">{{ currency.shortName }} {{ currency.sign }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="info-item">
+        <div>Balance ({{ accountForm.get('currency')?.value?.shortName }})</div>
+        <div>
+          <input #balanceInput appAutoResize formControlName="balance"
+                 type="number" min="0.00"
+                 (blur)="formatBalance()"> {{ accountForm.get('currency')?.value?.sign }}
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

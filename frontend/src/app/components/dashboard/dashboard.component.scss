@@ -1,0 +1,44 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  margin-bottom: 38px;
+  padding: 0.5rem 0.8rem;
+  width: 100%;
+  gap: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  .last-transactions-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem 0.8rem;
+    background-color: var(--secondary);
+    border-radius: 8px;
+
+    .last-transactions-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .last-transactions-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      animation: fade-in-scale 0.3s ease-in-out;
+    }
+
+    .transaction-component {
+      border-bottom: none;
+    }
+  }
+}
+
+app-top-expenses-widget {
+  width: 100%;
+}

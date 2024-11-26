@@ -1,0 +1,74 @@
+<div class="create-rule-container right-modal" *ngIf="isOpened" [@sideModalOpenClose] (swiperight)="onSwipeRight()">
+  <div class="create-rule-container-header">
+    <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+    <div><b>New rule</b></div>
+    <div></div>
+  </div>
+  <div class="create-rule-container-body">
+    <div class="condition">
+      <div class="centered-text">Condition</div>
+      <div class="secondary-header-text">Which transaction should be affected?</div>
+      <div>
+        <select>
+          <option (select)="selectConditionType(ConditionTypeEnum.TEXT_CONTAINS)">Name contains</option>
+          <option (select)="selectConditionType(ConditionTypeEnum.TEXT_EQUALS)">Name exactly equals</option>
+        </select>
+      </div>
+      <div>
+        <input [(ngModel)]="conditionText" placeholder="Enter transaction name">
+      </div>
+    </div>
+    <div class="action">
+      <div class="centered-text">Action</div>
+      <div class="secondary-header-text">What should happen to these transactions?</div>
+      <select [(ngModel)]="actionType">
+        <option [value]="ActionType.ASSIGN_CATEGORY">Assign category</option>
+        <option [value]="ActionType.MARK_AS_TRANSFER_TO">Mark as transfer to account</option>
+        <option [value]="ActionType.MARK_AS_TRANSFER_FROM">Mark as transfer from account</option>
+      </select>
+
+      <input *ngIf="actionType === ActionType.ASSIGN_CATEGORY"
+             class="clickable" placeholder="Select category"
+             [value]="assignCategory?.name" (click)="selectCategory()">
+
+      <input *ngIf="actionType === ActionType.MARK_AS_TRANSFER_TO"
+             class="clickable" placeholder="Select account to"
+             [value]="markAsTransferToAccount?.name" (click)="selectAccountTo()">
+
+      <input *ngIf="actionType === ActionType.MARK_AS_TRANSFER_FROM"
+             class="clickable" placeholder="Select account from"
+             [value]="markAsTransferFromAccount?.name" (click)="selectAccountFrom()">
+
+      <div class="update-existing-flag">
+        <div class="checkbox-wrapper">
+          <input type="checkbox" class="checkbox" [checked]="applyToExistingTransactions"
+                 [(ngModel)]="applyToExistingTransactions">
+        </div>
+        <div>apply to existing transactions?</div>
+      </div>
+    </div>
+  </div>
+  <div class="create-rule-container-footer">
+    <div class="save-button" (click)="createRule()">Save & apply</div>
+  </div>
+</div>
+
+<app-transaction-account-filter
+  *ngIf="isToAccountFilterOpened && isOpened"
+  [skipBankAccounts]="false"
+  (accountSelected)="onToAccountSelected($event)"
+  (closed)="closeToAccountFilter()"
+></app-transaction-account-filter>
+
+<app-transaction-account-filter
+  *ngIf="isFromAccountFilterOpened && isOpened"
+  [skipBankAccounts]="false"
+  (accountSelected)="onFromAccountSelected($event)"
+  (closed)="closeFromAccountFilter()"
+></app-transaction-account-filter>
+
+<app-categories *ngIf="isCategorySelectModalOpened && isOpened"
+                [type]="CategoryType.EXPENSE"
+                (selectedCategory)="onCategorySelected($event)">
+</app-categories>
+

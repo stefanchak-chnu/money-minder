@@ -1,0 +1,47 @@
+<div class="categories-filter-container right-modal" [@sideModalOpenClose] (swiperight)="onSwipeRight()">
+  <div class="categories-filter-container-header">
+    <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+    <div><b>Filter by categories</b></div>
+    <div class="active clickable" (click)="reset()">
+      Reset
+    </div>
+  </div>
+  <div class="categories-filter-container-body">
+    <div class="category-container" *ngFor="let category of categories">
+      <div class="category">
+        <div class="category-body">
+          <div class="category-icon-container">
+            <mat-icon svgIcon="{{category.icon}}" class="small-icon"></mat-icon>
+          </div>
+          <div class="category-title">{{ category.name }}</div>
+        </div>
+        <div class="category-footer">
+          <div class="checkbox-wrapper" (click)="uncheckCategory(category)">
+            <input type="checkbox" class="checkbox"
+                   [checked]="!this.unselectedCategories.includes(category.id!)">
+          </div>
+        </div>
+      </div>
+      <div class="sub-category"
+           *ngFor="let subCategory of category.subCategories">
+        <div class="category">
+          <div class="category-body">
+            <div class="category-icon-container">
+              <mat-icon svgIcon="{{subCategory.icon}}" class="small-icon"></mat-icon>
+            </div>
+            <div class="category-title">{{ subCategory.name }}</div>
+          </div>
+        </div>
+        <div class="category-footer">
+          <div class="checkbox-wrapper" (click)="uncheckCategory(subCategory)">
+            <input type="checkbox" class="checkbox"
+                   [checked]="!this.unselectedCategories.includes(subCategory.id!)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="categories-filter-container-footer">
+    <div class="save-button" (click)="apply()">Apply</div>
+  </div>
+</div>

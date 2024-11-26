@@ -1,0 +1,13 @@
+<div class="card-container"
+     [ngClass]="{
+      'black-card': monobankAccount.type === 'black',
+      'white-card': monobankAccount.type === 'white',
+      'fop-card': monobankAccount.type === 'fop'
+      }">
+  <div class="name">Monobank {{ monobankAccount.type }} ({{ monobankAccount.currency.shortName }})</div>
+  <div
+    *ngIf="monobankAccount.maskedPan !== null">{{ monobankAccount.maskedPan | slice:0:4 }} {{ monobankAccount.maskedPan | slice:4:8 }} {{ monobankAccount.maskedPan | slice:8:12 }} {{ monobankAccount.maskedPan | slice:12:16 }}
+  </div>
+  <div *ngIf="monobankAccount.maskedPan === null">{{ monobankAccount.iban }}</div>
+  <div class="balance">{{ monobankAccount.balance }} {{ monobankAccount.currency.sign }}</div>
+</div>

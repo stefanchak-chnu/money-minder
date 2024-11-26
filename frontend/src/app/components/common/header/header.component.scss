@@ -1,0 +1,47 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0.8rem 0 1rem;
+  align-items: center;
+  width: 100%;
+
+  .space {
+
+    .space-body {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      .space-icon {
+        width: 25px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--secondary);
+        border-radius: 6px;
+        color: var(--accent);
+      }
+
+      &:active {
+        color: var(--accent);
+      }
+    }
+  }
+
+  .actions {
+    margin-left: auto;
+
+    .icon {
+      cursor: pointer;
+      margin-left: 10px;
+
+      &:active {
+        color: var(--accent);
+        animation: bubble 0.4s ease-in-out;
+      }
+    }
+  }
+
+}

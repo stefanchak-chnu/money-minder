@@ -1,0 +1,202 @@
+<div class="transaction-create-container right-modal" *ngIf="isOpened" [@sideModalOpenClose]
+     (swiperight)="onSwipeRight()">
+  <div class="transaction-create-header">
+    <mat-icon svgIcon="arrow-left" class="gray-icon small-icon" (click)="closeModal()"></mat-icon>
+    <div class="tab-buttons">
+      <button class="tab-button tab-button-create" (click)="selectExpenseTab()"
+              [class.active-tab]="isExpenseTabActive">Expense
+      </button>
+      <button class="tab-button tab-button-create" (click)="selectIncomeTab()"
+              [class.active-tab]="isIncomeTabActive">Income
+      </button>
+      <button class="tab-button tab-button-create" (click)="selectTransferTab()"
+              [class.active-tab]="isTransferTabActive">Transfer
+      </button>
+    </div>
+    <div [ngClass]="{'active': transactionForm.valid}" class="clickable" (click)="save()">Save</div>
+  </div>
+
+  <div class="transaction-create-body">
+    <div class="tab-content">
+      <div class="tab-pane" [class.active-tab]="isExpenseTabActive">
+        <form [formGroup]="transactionForm">
+          <div class="transaction-header">
+            <div class="transaction-amount">
+              <b>
+                {{ transactionForm.controls['amount'].value | number:'1.2-2' }} {{ transactionForm.value.account?.currency?.sign ?? '$' }}
+              </b>
+            </div>
+            <input class="transaction-name-input" placeholder="Transaction name" formControlName="name">
+            <div class="transaction-date">
+              <input #dateInput type="date" [value]="transactionForm.value.date | date:'yyyy-MM-dd'"
+                     (change)="transactionForm.patchValue({date: dateInput.value})">
+            </div>
+          </div>
+          <div class="transaction-body">
+            <div class="transaction-account" (click)="openAccountFilter()">
+              <div class="icon-container active">
+                <mat-icon svgIcon="{{ transactionForm.value.account?.type?.iconName }}" class="icon"></mat-icon>
+              </div>
+              <div class="transaction-account-body">
+                <div class="secondary-text">Account</div>
+                <div>{{ transactionForm.value.account?.name }}</div>
+              </div>
+            </div>
+            <div class="transaction-category">
+              <div class="transaction-category-header" (click)="selectCategory()">
+                <div class="icon-container active">
+                  <mat-icon svgIcon="{{category?.icon?? 'question'}}" class="icon"></mat-icon>
+                </div>
+                <div>
+                  <div class="secondary-text">Category</div>
+                  <div *ngIf="category"><b>{{ category.name }}</b></div>
+                  <div *ngIf="!category">
+                    <b>Uncategorized {{ transactionType.toLowerCase() }}</b></div>
+                </div>
+              </div>
+              <div>
+                <input #amountInput appAutoResize formControlName="amount"
+                       type="number" min="0.00"
+                       (blur)="formatAmount()"> {{ transactionForm.value.account?.currency?.sign ?? '$' }}
+              </div>
+            </div>
+            <div class="transaction-notes">
+              <div class="notes-icon-container">
+                <mat-icon svgIcon="textarea" class="notes-icon"></mat-icon>
+              </div>
+              <div class="notes-textarea-container">
+                <textarea placeholder="Notes" formControlName="notes"></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="tab-pane" [class.active-tab]="isIncomeTabActive">
+        <form [formGroup]="transactionForm">
+          <div class="transaction-header">
+            <div class="transaction-amount income-color">
+              <b>
+                {{ transactionForm.controls['amount'].value | number:'1.2-2' }} {{ transactionForm.value.account?.currency?.sign ?? '$' }}
+              </b>
+            </div>
+            <input class="transaction-name-input" placeholder="Transaction name" formControlName="name">
+            <div class="transaction-date">
+              <input #dateInput type="date" [value]="transactionForm.value.date | date:'yyyy-MM-dd'"
+                     (change)="transactionForm.patchValue({date: dateInput.value})">
+            </div>
+          </div>
+          <div class="transaction-body">
+            <div class="transaction-account" (click)="openAccountFilter()">
+              <div class="icon-container active">
+                <mat-icon svgIcon="{{ transactionForm.value.account?.type?.iconName }}" class="icon"></mat-icon>
+              </div>
+              <div class="transaction-account-body">
+                <div class="secondary-text">Account</div>
+                <div>{{ transactionForm.value.account?.name }}</div>
+              </div>
+            </div>
+            <div class="transaction-category">
+              <div class="transaction-category-header" (click)="selectCategory()">
+                <div class="icon-container active">
+                  <mat-icon svgIcon="{{category?.icon?? 'question'}}" class="icon"></mat-icon>
+                </div>
+                <div>
+                  <div class="secondary-text">Category</div>
+                  <div *ngIf="category"><b>{{ category.name }}</b></div>
+                  <div *ngIf="!category">
+                    <b>Uncategorized {{ transactionType.toLowerCase() }}</b></div>
+                </div>
+              </div>
+              <div>
+                <input #amountInput appAutoResize formControlName="amount"
+                       type="number" min="0.00"
+                       (blur)="formatAmount()"> {{ transactionForm.value.account?.currency?.sign ?? '$' }}
+              </div>
+            </div>
+            <div class="transaction-notes">
+              <div class="notes-icon-container">
+                <mat-icon svgIcon="textarea" class="notes-icon"></mat-icon>
+              </div>
+              <div class="notes-textarea-container">
+                <textarea placeholder="Notes" formControlName="notes"></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="tab-pane" [class.active-tab]="isTransferTabActive">
+        <form [formGroup]="transactionForm">
+          <div class="transaction-header">
+            <div class="transaction-amount">
+              <b>
+                {{ transactionForm.controls['amount'].value | number:'1.2-2' }} {{ transactionForm.value.account?.currency?.sign ?? '$' }}
+              </b>
+            </div>
+            <input class="transaction-name-input" placeholder="Transaction name" formControlName="name">
+            <div class="transaction-date">
+              <input #dateInput type="date" [value]="transactionForm.value.date | date:'yyyy-MM-dd'"
+                     (change)="transactionForm.patchValue({date: dateInput.value})">
+            </div>
+          </div>
+          <div class="transaction-body">
+            <div class="transaction-account" (click)="openAccountFilter()">
+              <div class="icon-container active">
+                <mat-icon svgIcon="{{ transactionForm.value.account?.type?.iconName }}" class="icon"></mat-icon>
+              </div>
+              <div class="transaction-account-body">
+                <div class="secondary-text">From account</div>
+                <div>{{ transactionForm.value.account.name }}</div>
+              </div>
+            </div>
+            <div class="transaction-to-account">
+              <div class="transaction-to-account-header" (click)="openToAccountFilter()">
+                <div class="icon-container active">
+                  <mat-icon svgIcon="{{ transactionForm.value.toAccount?.type?.iconName }}" class="icon"></mat-icon>
+                </div>
+                <div class="transaction-account-body">
+                  <div class="secondary-text">To account</div>
+                  <div>{{ transactionForm.value.toAccount?.name }}</div>
+                </div>
+              </div>
+              <div>
+                <input #amountInput appAutoResize formControlName="amount"
+                       type="number" min="0.00"
+                       (blur)="formatAmount()"> {{ transactionForm.value.account?.currency?.sign ?? '$' }}
+              </div>
+            </div>
+            <div class="transaction-notes">
+              <div class="notes-icon-container">
+                <mat-icon svgIcon="textarea" class="notes-icon"></mat-icon>
+              </div>
+              <div class="notes-textarea-container">
+                <textarea placeholder="Notes" formControlName="notes"></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-transaction-account-filter
+  *ngIf="isAccountFilterOpened && isOpened"
+  [selectedAccount]="transactionForm.controls['account'].value"
+  [skipBankAccounts]="true"
+  (closed)="closeAccountFilter()"
+  (accountSelected)="onAccountSelected($event)"
+></app-transaction-account-filter>
+
+<app-transaction-account-filter
+  *ngIf="isToAccountFilterOpened && isOpened"
+  [selectedAccount]="transactionForm.controls['toAccount'].value"
+  [skipBankAccounts]="true"
+  (closed)="closeToAccountFilter()"
+  (accountSelected)="onToAccountSelected($event)"
+></app-transaction-account-filter>
+
+<app-categories *ngIf="isCategorySelectModalOpened && isOpened"
+                [type]="this.transactionType === TransactionType.EXPENSE ? CategoryType.EXPENSE : CategoryType.INCOME"
+                (selectedCategory)="onCategorySelected($event)">
+</app-categories>
+
